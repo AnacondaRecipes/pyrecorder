@@ -13,6 +13,9 @@ source:
 
 build:
   number: 0
+  # opencv not available for s390x
+  # opencv not available for  py312 on osx-64 and linux-64
+  skip: true  # [s390x or (py>311 and (osx and x86_64 or linux64))]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
