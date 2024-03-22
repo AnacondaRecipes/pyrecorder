@@ -8,12 +8,17 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: b6da2f8bd3e1b72802ee93c524d6aef01900ebb85cb9aaaf0338c33ee1f1db29
+  patches:
+    - patches/0001-patch-requirements-opencv.patch
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
+  build:
+    - patch     # [not win]
+    - m2-patch  # [win]
   host:
     - python
     - pip
@@ -22,14 +27,13 @@ requirements:
   run:
     - python
     - imageio
-    - matplotlib >=3
+    - matplotlib-base >=3
     - numpy >=1.15
     - opencv >=4.0.0.21
 
 test:
   imports:
     - pyrecorder
-    - pyrecorder.recorder
     - pyrecorder.converters
     - pyrecorder.experimental
     - pyrecorder.writers
