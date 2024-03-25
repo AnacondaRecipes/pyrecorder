@@ -32,7 +32,7 @@ requirements:
     - imageio
     - matplotlib-base >=3
     - numpy >=1.15
-    - opencv >=4.0.0.21
+    - opencv-python-headless >=4.0.0.21
 
 test:
   imports:
