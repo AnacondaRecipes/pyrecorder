@@ -1,0 +1,61 @@
+{% set name = "pyrecorder" %}
+{% set version = "0.2.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: b6da2f8bd3e1b72802ee93c524d6aef01900ebb85cb9aaaf0338c33ee1f1db29
+  patches:
+    - patches/0001-patch-requirements-opencv.patch
+
+build:
+  number: 0
+  # opencv-python-headless not available for s390x or py312
+  skip: true  # [s390x or py>311]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+
+requirements:
+  build:
+    - patch     # [not win]
+    - m2-patch  # [win]
+  host:
+    - python
+    - pip
+    - setuptools
+    - wheel
+  run:
+    - python
+    - imageio
+    - matplotlib-base >=3
+    - numpy >=1.15
+    - opencv-python-headless >=4.0.0.21
+
+test:
+  imports:
+    - pyrecorder
+    - pyrecorder.converters
+    - pyrecorder.experimental
+    - pyrecorder.writers
+  requires:
+    - pip
+  commands:
+    - pip check
+
+about:
+  home: https://anyoptimization.com/projects/pyrecorder/
+  license: Apache-2.0
+  license_family: APACHE
+  license_file: LICENSE
+  summary: Recording made easy
+  description: |
+    Recording made easy - The tool you need for animations using Matplotlib, Plotly
+    and other plotting libraries.
+  dev_url: https://github.com/anyoptimization/pyrecorder
+  doc_url: https://anyoptimization.com/projects/pyrecorder/
+
+extra:
+  recipe-maintainers:
+    - lorepirri

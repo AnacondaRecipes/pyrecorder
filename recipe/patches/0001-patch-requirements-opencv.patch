@@ -1,0 +1,25 @@
+From 14236f51a7cd567fe9d26193c6addef477651319 Mon Sep 17 00:00:00 2001
+From: Lorenzo Pirritano <lpirritano@anaconda.com>
+Date: Fri, 22 Mar 2024 10:06:49 -0600
+Subject: [PATCH] patch requirements opencv
+
+---
+ setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/setup.py b/setup.py
+index a077fae..e33ca18 100644
+--- a/setup.py
++++ b/setup.py
+@@ -23,7 +23,7 @@ data = dict(
+                 "plotting libraries. ",
+     license='Apache License 2.0',
+     keywords="video,recording,matplotlib,plotly",
+-    install_requires=['numpy>=1.15', 'opencv-python>=4.0.0.21', 'matplotlib>=3', 'imageio'],
++    install_requires=['numpy>=1.15', 'matplotlib>=3', 'imageio'],
+     include_package_data=True,
+     platforms='any',
+     classifiers=[
+-- 
+2.39.1
+
